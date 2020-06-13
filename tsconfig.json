@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "jsx": "react",
+    "importsNotUsedAsValues": "preserve",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "strict": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
