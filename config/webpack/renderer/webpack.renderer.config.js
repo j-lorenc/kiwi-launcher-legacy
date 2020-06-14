@@ -12,7 +12,7 @@ module.exports = merge.smart(baseConfig, {
     app: ['@babel/polyfill', './src/renderer/app.tsx'],
   },
   output: {
-    path: path.resolve(__dirname, '../..', 'dist/renderer'),
+    path: path.resolve(__dirname, '../../..', 'dist/renderer'),
     filename: '[name].js',
   },
   module: {

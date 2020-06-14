@@ -1,38 +1,44 @@
-import { app, BrowserWindow, session } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import * as isDev from 'electron-is-dev';
 
-let win: BrowserWindow | null;
+export let win: BrowserWindow | null = null;
 
-app.on('ready', appReady);
-app.on('window-all-closed', allWindowsClosed);
-app.on('activate', activate);
+export function attachEvents(): void {
+  app.on('ready', appReady);
+  app.on('window-all-closed', allWindowsClosed);
+  app.on('activate', activate);
+}
 
-function appReady() {
+export function appReady(): void {
   createWindow();
 }
 
-function allWindowsClosed() {
+export function allWindowsClosed(): void {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 }
 
-function activate() {
+export function activate(): void {
   if (!win) {
     createWindow();
   }
 }
 
-const createWindow = async () => {
-  // if (process.env.NODE_ENV !== 'production') {
-  // }
-
+export async function createWindow(): Promise<void> {
   win = new BrowserWindow({
     width: 800,
     height: 600,
+    frame: false,
+    show: false,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
+      preload: path.join(__dirname, '../preload', 'preload.js'),
+      contextIsolation: false,
+      experimentalFeatures: true,
+      webSecurity: isDev ? false : true,
     },
   });
 
@@ -48,7 +54,15 @@ const createWindow = async () => {
     );
   }
 
+  win.once('ready-to-show', () => {
+    if (win) {
+      win.maximize();
+      win.show();
+    }
+  });
+
   win.on('closed', () => {
     win = null;
   });
-};
+}
+attachEvents();

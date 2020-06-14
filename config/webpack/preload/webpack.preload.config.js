@@ -11,7 +11,7 @@ module.exports = merge.smart(baseConfig, {
     preload: './src/preload/index.ts',
   },
   output: {
-    path: path.resolve(__dirname, '../..', 'dist/preload/'),
+    path: path.resolve(__dirname, '../..', 'dist/preload'),
     filename: '[name].js',
   },
   module: {
@@ -30,7 +30,7 @@ module.exports = merge.smart(baseConfig, {
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         enabled: true,
-        files: ['./src/renderer/**/*ts?(x)'],
+        files: ['./src/preload/*.ts?(x)'],
       },
     }),
     new webpack.DefinePlugin({

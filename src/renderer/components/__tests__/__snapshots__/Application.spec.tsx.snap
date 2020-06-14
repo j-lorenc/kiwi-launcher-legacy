@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-<div>
-  New Launcher
-</div>
-`;
-
-exports[`Applcation should render correctly 1`] = `
+exports[`Application should render correctly 1`] = `
 <div>
   New Launcher
 </div>

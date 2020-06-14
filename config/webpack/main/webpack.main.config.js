@@ -30,7 +30,7 @@ module.exports = merge.smart(baseConfig, {
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         enabled: true,
-        files: ['./src/renderer/**/*ts?(x)'],
+        files: ['./src/main/*.ts?(x)'],
       },
     }),
     new webpack.DefinePlugin({
