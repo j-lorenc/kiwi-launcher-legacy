@@ -65,4 +65,5 @@ export async function createWindow(): Promise<void> {
     win = null;
   });
 }
+
 attachEvents();

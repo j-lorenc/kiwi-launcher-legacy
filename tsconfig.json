@@ -2,14 +2,17 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
+    "lib": ["DOM", "ES2020"],
     "jsx": "react",
     "importsNotUsedAsValues": "preserve",
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "strictNullChecks": true,
     "alwaysStrict": true,
-    "strict": true
+    "strict": true,
+    "sourceMap": true
   },
+  "files": ["src/declarations.d.ts"],
   "include": ["./src/main/**/*.ts", "./src/preload/**/*.ts", "./src/renderer/**/*.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "config/**/*.ts"]
 }
