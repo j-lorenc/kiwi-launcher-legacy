@@ -53,7 +53,7 @@ module.exports = merge.smart(baseConfig, {
         loaders: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/,
+        test: /\.(gif|png|jpe?g)$/,
         use: [
           'file-loader',
           {
@@ -66,17 +66,7 @@ module.exports = merge.smart(baseConfig, {
       },
       {
         test: /\.svg$/,
-        use: [
-          {
-            loader: '@svgr/webpack',
-            options: {
-              native: true,
-            },
-          },
-          {
-            loader: 'url-loader',
-          },
-        ],
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.(eot|ttf|woff|woff2)$/,

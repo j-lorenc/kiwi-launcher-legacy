@@ -1,0 +1,71 @@
+.header-bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+
+  padding: 5px;
+
+  color: white;
+  background: black;
+
+  &__title {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+    &__text {
+      font-size: 14px;
+    }
+  }
+
+  &__window-button-container {
+    justify-items: flex-end;
+    display: flex;
+    margin: -5px;
+  }
+
+  &__window-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    border: none;
+    background: none;
+
+    svg {
+      stroke: white;
+      transform: scale(0.6);
+      stroke-width: 1.5;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:active,
+    &:focus {
+      border: none;
+      outline: none;
+    }
+
+    &--close {
+      svg {
+        transform: scale(0.8);
+      }
+
+      &:hover {
+        background: rgba(255, 0, 0, 1);
+      }
+    }
+
+    &--maximize {
+      svg {
+        transform: scaleX(-0.6) scaleY(0.6);
+      }
+    }
+  }
+}

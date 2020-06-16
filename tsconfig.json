@@ -5,6 +5,7 @@
     "lib": ["DOM", "ES2020"],
     "jsx": "react",
     "importsNotUsedAsValues": "preserve",
+    "esModuleInterop": true,
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "strictNullChecks": true,
@@ -12,7 +13,11 @@
     "strict": true,
     "sourceMap": true
   },
-  "files": ["src/declarations.d.ts"],
-  "include": ["./src/main/**/*.ts", "./src/preload/**/*.ts", "./src/renderer/**/*.ts"],
+  "include": [
+    "./src/main/**/*.ts",
+    "./src/preload/**/*.ts",
+    "./src/renderer/**/*.ts",
+    "src/index.d.ts"
+  ],
   "exclude": ["node_modules", "**/*.spec.ts", "config/**/*.ts"]
 }
