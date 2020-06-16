@@ -1,4 +1,5 @@
 import { remote } from 'electron';
+import mousetrap from 'mousetrap';
 
 window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('message', (e) => {
@@ -18,4 +19,12 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+});
+
+mousetrap.bind('ctrl+`', () => {
+  if (remote.getCurrentWebContents().isDevToolsOpened()) {
+    remote.getCurrentWebContents().closeDevTools();
+  } else {
+    remote.getCurrentWebContents().openDevTools();
+  }
 });
