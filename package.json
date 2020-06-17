@@ -7,7 +7,9 @@
     "start-renderer-dev": "webpack-dev-server --config config/webpack/renderer/webpack.renderer.dev.config.js",
     "start-main-dev": "webpack --config config/webpack/preload/webpack.preload.config.js && webpack --config config/webpack/main/webpack.main.config.js && electron ./dist/main/main.js",
     "start": "cross-env START_HOT=1 npm run start-renderer-dev",
-    "test": "jest --watchAll --verbose"
+    "test": "jest --projects config/jest/jest-renderer.test.config.js --watchAll --verbose",
+    "e2e": "jest --projects config/jest/jest-main.test.config.js --watchAll --verbose",
+    "test:all": "jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
@@ -56,6 +58,7 @@
     "file-loader": "^6.0.0",
     "fork-ts-checker-webpack-plugin": "^5.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
     "image-webpack-loader": "^6.0.0",
     "jest": "^26.0.1",
     "node-sass": "^4.14.1",

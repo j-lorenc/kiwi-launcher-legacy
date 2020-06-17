@@ -2,6 +2,47 @@
 
 exports[`Application should render correctly 1`] = `
 <div>
-  New Launcher
+  <header
+    className="header-bar"
+  >
+    <span
+      className="header-bar__title"
+    >
+      <img
+        className="header-bar__title__icon"
+        src="icon.png"
+      />
+      <span
+        className="header-bar__title__text"
+      >
+        Kiwi Launcher
+      </span>
+    </span>
+    <div
+      className="header-bar__window-button-container"
+    >
+      <button
+        className="header-bar__window-button header-bar__window-button--minimize"
+        onClick={[Function]}
+      >
+        <Icon src="minus.svg" />
+      </button>
+      <button
+        className="header-bar__window-button header-bar__window-button--maximize"
+        onClick={[Function]}
+      >
+        <Icon src="copy.svg" />
+      </button>
+      <button
+        className="header-bar__window-button header-bar__window-button--close"
+        onClick={[Function]}
+      >
+        <Icon src="x.svg" />
+      </button>
+    </div>
+  </header>
+  <h1>
+    New Launcher
+  </h1>
 </div>
 `;

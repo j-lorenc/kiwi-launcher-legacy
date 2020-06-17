@@ -13,11 +13,6 @@
     "strict": true,
     "sourceMap": true
   },
-  "include": [
-    "./src/main/**/*.ts",
-    "./src/preload/**/*.ts",
-    "./src/renderer/**/*.ts",
-    "src/index.d.ts"
-  ],
+  "include": ["./src/main/**/*", "./src/preload/**/*", "./src/renderer/**/*", "src/global.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "config/**/*.ts"]
 }
