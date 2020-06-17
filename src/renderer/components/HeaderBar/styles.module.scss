@@ -8,6 +8,11 @@
   color: white;
   background: black;
 
+  &__drag-bar {
+    -webkit-app-region: drag;
+    flex: 1;
+  }
+
   &__title {
     display: flex;
     align-items: center;
@@ -36,9 +41,12 @@
     border: none;
     background: none;
 
+    div {
+      transform: scale(0.65);
+    }
+
     svg {
       stroke: white;
-      transform: scale(0.6);
       stroke-width: 1.5;
     }
 

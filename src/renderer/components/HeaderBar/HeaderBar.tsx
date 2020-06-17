@@ -11,10 +11,12 @@ import { close, minimize, maximize } from '../../events/window';
 const Header: React.FC<{ title: string }> = ({ title }) => {
   return (
     <header className={styles['header-bar']}>
-      <span className={styles['header-bar__title']}>
-        <img className={styles['header-bar__title__icon']} src={icon} />
-        <span className={styles['header-bar__title__text']}>{title}</span>
-      </span>
+      <div className={styles['header-bar__drag-bar']}>
+        <span className={styles['header-bar__title']}>
+          <img className={styles['header-bar__title__icon']} src={icon} />
+          <span className={styles['header-bar__title__text']}>{title}</span>
+        </span>
+      </div>
 
       <div className={styles['header-bar__window-button-container']}>
         <button
@@ -23,7 +25,9 @@ const Header: React.FC<{ title: string }> = ({ title }) => {
           }}
           className={`${styles['header-bar__window-button']} ${styles['header-bar__window-button--minimize']}`}
         >
-          <MinimizeIcon />
+          <div>
+            <MinimizeIcon />
+          </div>
         </button>
         <button
           onClick={() => {
@@ -31,7 +35,9 @@ const Header: React.FC<{ title: string }> = ({ title }) => {
           }}
           className={`${styles['header-bar__window-button']} ${styles['header-bar__window-button--maximize']}`}
         >
-          <MaximizeIcon />
+          <div>
+            <MaximizeIcon />
+          </div>
         </button>
         <button
           onClick={() => {
@@ -39,7 +45,9 @@ const Header: React.FC<{ title: string }> = ({ title }) => {
           }}
           className={`${styles['header-bar__window-button']} ${styles['header-bar__window-button--close']}`}
         >
-          <CloseIcon />
+          <div>
+            <CloseIcon />
+          </div>
         </button>
       </div>
     </header>
