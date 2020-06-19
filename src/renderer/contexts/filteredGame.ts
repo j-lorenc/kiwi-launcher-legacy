@@ -1,5 +1,5 @@
-import React, { useContext, Dispatch } from 'react';
-import { GameFilter } from '../../@types/index';
+import React, { useContext } from 'react';
+import { GameFilter, FilterAction, FilterContextType } from '../../@types';
 
 export const filterReducer = (state: GameFilter, action: FilterAction): GameFilter => {
   switch (action.type) {
@@ -9,24 +9,20 @@ export const filterReducer = (state: GameFilter, action: FilterAction): GameFilt
         gameName: action.payload,
       };
     }
-    default:
-      return state;
   }
 };
-
-export type FilterAction = { type: 'filter'; payload: string };
 
 export const initialFilter: GameFilter = {
   gameName: '',
 };
 
-const FilterContext = React.createContext<{ state: GameFilter; dispatch: Dispatch<FilterAction> }>({
+const FilterContext = React.createContext<FilterContextType>({
   state: initialFilter,
   dispatch: () => null,
 });
 
-export const useFilterContext = (): { state: GameFilter; dispatch: Dispatch<FilterAction> } => {
-  return useContext<{ state: GameFilter; dispatch: Dispatch<FilterAction> }>(FilterContext);
+export const useFilterContext = (): FilterContextType => {
+  return useContext<FilterContextType>(FilterContext);
 };
 
 export default FilterContext;

@@ -14,5 +14,5 @@
     "sourceMap": true
   },
   "include": ["./src/main/**/*", "./src/preload/**/*", "./src/renderer/**/*", "src/global.d.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "config/**/*.ts"]
+  "exclude": ["node_modules", "config/**/*.ts"]
 }
