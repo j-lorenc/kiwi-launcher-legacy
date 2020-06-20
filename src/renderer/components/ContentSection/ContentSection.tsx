@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import { useFilterContext } from '../../contexts/filteredGame';
 
 const ContentSection: React.FC = () => {
   return (
@@ -12,16 +11,24 @@ const ContentSection: React.FC = () => {
 };
 
 const GamesList: React.FC = () => {
-  const { state } = useFilterContext();
-
+  const games = [] as {
+    _id: string;
+    name: string;
+    iconUrl: string;
+  }[];
   return (
     <aside className={styles['games-list-container']}>
       <ul className={styles['games-list']}>
-        <li className={styles['games-list__list-item']}>
-          <button className={`${styles['games-list__game']} ${styles['games-list__game--active']}`}>
-            {state.gameName}
-          </button>
-        </li>
+        {games.map((game) => {
+          return (
+            <li key={game._id} className={styles['games-list__list-item']}>
+              <button className={`${styles['games-list__game']}`}>
+                <img className={styles['games-list__game__icon']} src={game.iconUrl} />
+                {game.name}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );

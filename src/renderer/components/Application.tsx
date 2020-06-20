@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useReducer } from 'react';
-import * as styles from './app.module.scss';
+import styles from './app.module.scss';
 import HeaderBar from './HeaderBar/HeaderBar';
 import FilterContext, { filterReducer, initialFilter } from '../contexts/filteredGame';
 import FooterBar from './FooterBar/FooterBar';
@@ -11,9 +11,11 @@ export const Application: () => JSX.Element = () => {
 
   return (
     <FilterContext.Provider value={{ state, dispatch }}>
-      <HeaderBar title="Kiwi Launcher" />
-      <ContentSection />
-      <FooterBar />
+      <div className={styles['app-container']}>
+        <HeaderBar title="Kiwi Launcher" />
+        <ContentSection />
+        <FooterBar />
+      </div>
     </FilterContext.Provider>
   );
 };

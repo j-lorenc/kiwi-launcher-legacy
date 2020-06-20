@@ -5,11 +5,14 @@ section {
 
 .games-list-container {
   background-color: rgba(0, 0, 0, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
   border-right: 1px solid rgba(0, 0, 0, 0.0755);
   overflow-y: scroll;
   width: 350px;
   position: relative;
   padding: 0;
+  display: flex;
 }
 
 .games-list {
@@ -17,10 +20,12 @@ section {
   margin: 0;
   display: flex;
   flex-direction: column;
+  flex: 1;
 
   &__list-item {
     list-style: none;
     display: flex;
+    padding-left: 5px;
   }
 
   &__game {
@@ -29,12 +34,11 @@ section {
     font-family: Oswald;
     color: white;
     background: none;
-    padding: 8px 35px;
+    padding: 8px 10px;
     border: none;
     position: relative;
     display: flex;
     align-items: center;
-    min-height: 36px;
     height: 100%;
     letter-spacing: 0.35px;
     text-shadow: 1px 1px 1px #000, -1px -1px 0 rgba(0, 0, 0, 0.1), 1px -1px 0 rgba(0, 0, 0, 0.1),
@@ -46,7 +50,8 @@ section {
       outline: none;
     }
 
-    &:hover {
+    &:hover,
+    &--active {
       transition: background-color 200ms;
       background-color: rgba(0, 0, 0, 0.35);
       cursor: pointer;

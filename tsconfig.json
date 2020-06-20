@@ -11,7 +11,8 @@
     "strictNullChecks": true,
     "alwaysStrict": true,
     "strict": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "resolveJsonModule": true
   },
   "include": ["./src/main/**/*", "./src/preload/**/*", "./src/renderer/**/*", "src/global.d.ts"],
   "exclude": ["node_modules", "config/**/*.ts"]

@@ -58,6 +58,7 @@ const DragBar: React.FC<{ title: string }> = ({ title }) => (
 
 const Header: React.FC<{ title: string }> = ({ title }) => {
   const filterContext = useFilterContext();
+  const filterActive = filterContext.state.gameName.length > 0;
 
   return (
     <header className={styles['header-bar']}>
@@ -73,6 +74,7 @@ const Header: React.FC<{ title: string }> = ({ title }) => {
             <SearchIcon />
           </div>
           <input
+            className={filterActive ? `${styles['active']}` : undefined}
             type="type"
             value={filterContext.state.gameName}
             onChange={(e) => {
