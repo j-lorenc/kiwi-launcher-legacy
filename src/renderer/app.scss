@@ -11,6 +11,47 @@ h1 {
   overflow: hidden;
 }
 
+button {
+  border: none;
+  background: none;
+
+  &:focus,
+  &:active {
+    border: none;
+    outline: none;
+  }
+}
+
+input {
+  font-family: 'SairaExtraCondensed';
+  font-size: 14px;
+
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.17);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+
+  letter-spacing: 0.5px;
+
+  outline: none;
+  border-radius: 3px;
+  transition: 0.15s width;
+
+  &:focus,
+  &:active,
+  &.active {
+    border-right: 1px solid rgba(181, 230, 29, 1);
+    border-bottom: 1px solid rgba(181, 230, 29, 1);
+
+    border-top: 1px solid rgba(180, 230, 29, 0.6);
+    border-left: 1px solid rgba(181, 230, 29, 0.6);
+
+    transition: 0.3s width;
+  }
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 12px;

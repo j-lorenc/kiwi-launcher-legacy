@@ -24,6 +24,10 @@ module.exports = merge.smart(baseConfig, {
           transpileOnly: true,
         },
       },
+      {
+        test: /\.node?$/,
+        loader: 'node-loader',
+      },
     ],
   },
   plugins: [

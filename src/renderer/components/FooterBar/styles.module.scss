@@ -1,7 +1,24 @@
 footer {
   color: white;
   background: rgba(25, 25, 25, 0.995);
-  height: 30px;
+  height: 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.7);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    font-family: 'Oswald';
+    cursor: pointer;
+    color: white;
+    padding: 0 10px;
+    height: 100%;
+    font-size: 12px;
+    letter-spacing: 0.35px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
 }

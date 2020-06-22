@@ -1,7 +1,11 @@
 import { remote } from 'electron';
 import mousetrap from 'mousetrap';
 
-window.addEventListener('DOMContentLoaded', () => {
+import steamService from './services/steamService';
+
+window.addEventListener('DOMContentLoaded', async () => {
+  steamService.attachEvents();
+
   window.addEventListener('message', (e) => {
     if (e.data.type === 'close-window') {
       remote.getCurrentWindow().close();
