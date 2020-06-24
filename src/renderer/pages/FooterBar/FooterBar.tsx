@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles.module.scss';
 import LibraryIcon from '@fortawesome/fontawesome-pro/svgs/light/gamepad-alt.svg';
-import SteamCredModal from '../Modal/SteamCredModal';
+import SteamCredModal from '../../components/Modal/SteamCredModal';
 
 const FooterBar: React.FC = () => {
   const [showSteamCredModal, setShowSteamCredModal] = useState<boolean>(false);
