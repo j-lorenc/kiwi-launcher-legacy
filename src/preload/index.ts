@@ -5,6 +5,15 @@ import steamService from './services/steamService';
 
 window.addEventListener('DOMContentLoaded', async () => {
   steamService.attachEvents();
+  steamService.import().then((games) => {
+    window.postMessage(
+      {
+        type: 'games',
+        value: games,
+      },
+      '*'
+    );
+  });
 
   window.addEventListener('message', (e) => {
     if (e.data.type === 'close-window') {

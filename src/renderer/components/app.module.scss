@@ -3,4 +3,41 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 0;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+:global(.fade-enter) {
+  opacity: 0;
+}
+
+:global(.fade-enter.fade-enter-active) {
+  opacity: 1;
+  transition: opacity 350ms ease-in-out;
+}
+
+:global(.fade-exit) {
+  opacity: 1;
+}
+
+:global(.fade-exit.fade-exit-active) {
+  opacity: 0;
+  transition: opacity 350ms ease-in-out;
+}
+
+:global(.fade-exit-done) {
+  opacity: 0;
 }

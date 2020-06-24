@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles.module.scss';
+import { gamesListener } from '../../listeners/games';
+import { Game } from '../../../@types';
+import { useSelectedGameContext } from '../../contexts/selectedGame';
 
 const ContentSection: React.FC = () => {
   return (
@@ -11,24 +14,42 @@ const ContentSection: React.FC = () => {
 };
 
 const GamesList: React.FC = () => {
-  const games = [] as {
-    _id: string;
-    name: string;
-    iconUrl: string;
-  }[];
+  const [games, setGames] = useState<Game[]>([] as Game[]);
+  const { state, dispatch } = useSelectedGameContext();
+
+  gamesListener(setGames);
+
+  const setSelectedGame = (game: Game) => {
+    dispatch({
+      type: 'setSelectedGame',
+      payload: game,
+    });
+  };
+
   return (
     <aside className={styles['games-list-container']}>
       <ul className={styles['games-list']}>
-        {games.map((game) => {
-          return (
-            <li key={game._id} className={styles['games-list__list-item']}>
-              <button className={`${styles['games-list__game']}`}>
-                <img className={styles['games-list__game__icon']} src={game.iconUrl} />
-                {game.name}
-              </button>
-            </li>
-          );
-        })}
+        {games
+          .sort((a, b) => {
+            return a.name.localeCompare(b.name);
+          })
+          .map((game) => {
+            return (
+              <li key={game.id} className={styles['games-list__list-item']}>
+                <button
+                  className={`${styles['games-list__game']} ${
+                    state.id === game.id ? styles['games-list__game--active'] : ''
+                  }`}
+                  onClick={() => {
+                    setSelectedGame(game);
+                  }}
+                >
+                  <img className={styles['games-list__game__icon']} src={game.iconUrl} />
+                  {game.name}
+                </button>
+              </li>
+            );
+          })}
       </ul>
     </aside>
   );

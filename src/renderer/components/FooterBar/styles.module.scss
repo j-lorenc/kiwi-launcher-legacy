@@ -1,12 +1,25 @@
 footer {
   color: white;
-  background: rgba(25, 25, 25, 0.995);
+  background: linear-gradient(rgba(15, 15, 15, 1), rgba(15, 15, 15, 0.95));
   height: 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.7);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   display: flex;
   justify-content: flex-end;
+  position: relative;
+
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    border-top: 1px solid rgba(15, 15, 15, 1);
+    z-index: 2;
+  }
 
   button {
     font-family: 'Oswald';
