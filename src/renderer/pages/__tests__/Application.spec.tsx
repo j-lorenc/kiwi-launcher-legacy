@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Application } from '../../pages/Application';
+import { Application } from '../Application';
 import * as renderer from 'react-test-renderer';
 
 describe('Application', () => {
