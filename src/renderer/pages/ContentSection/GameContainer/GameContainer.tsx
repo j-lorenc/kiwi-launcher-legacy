@@ -3,6 +3,7 @@ import { Game } from '../../../../@types';
 import withAnimation from '../../../hocs/withAnimation';
 import { AnimeProps } from 'react-anime';
 import styles from './styles.module.scss';
+import { CoverImage } from '../../../components/CoverImage/CoverImage';
 
 export const GameDetails: React.FC<{ game: Game }> = ({ game }) => {
   return (
@@ -23,7 +24,14 @@ const Card: React.FC<{ game: Game }> = ({ game }) => {
 };
 
 const InnerCard: React.FC<{ game: Game }> = ({ game }) => {
-  return <h1 className={`${styles['card__header']}`}> {game.name}</h1>;
+  return (
+    <div className={styles['card__card-grid']}>
+      {game.coverUrl && (
+        <CoverImage className={styles['card__cover-image']} coverSrc={game.coverUrl} />
+      )}
+      <h1 className={`${styles['card__header']}`}> {game.name}</h1>
+    </div>
+  );
 };
 
 const AnimatedCard = withAnimation<{ game: Game }>([

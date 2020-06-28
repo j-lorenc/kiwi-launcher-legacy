@@ -1,0 +1,27 @@
+.cover-image {
+  max-width: 300px;
+  max-height: 180px;
+  width: auto;
+  height: auto;
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  z-index: 100;
+  display: flex;
+
+  img {
+    width: 100%;
+  }
+
+  &::after {
+    position: absolute;
+    content: ' ';
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.43);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.75), inset 0px 0px 30px rgba(0, 0, 0, 0.6);
+    z-index: 110;
+  }
+}

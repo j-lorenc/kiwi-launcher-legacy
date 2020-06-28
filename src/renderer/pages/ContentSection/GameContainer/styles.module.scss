@@ -35,8 +35,19 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
+  &__card-grid {
+    display: grid;
+    grid-template-columns: 300px auto;
+    align-items: center;
+  }
+
   &__header {
     font-size: 36px;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    padding: 20px;
+  }
+
+  &__cover-image {
+    width: 100%;
   }
 }

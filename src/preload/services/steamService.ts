@@ -78,6 +78,7 @@ class SteamService {
             : gameMetaData
             ? gameMetaData.background
             : undefined;
+        game.coverUrl = gameMetaData?.header_image;
       }
     }
 

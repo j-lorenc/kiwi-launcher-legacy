@@ -66,6 +66,7 @@ export interface SteamGameMetaData {
   content_descriptors: {
     ids: number[];
   };
+  header_image: string;
   screenshots: [
     {
       id: number;
@@ -81,4 +82,5 @@ export interface Game {
   originalId: string | number;
   iconUrl?: string;
   backgroundUrl?: string;
+  coverUrl?: string;
 }
