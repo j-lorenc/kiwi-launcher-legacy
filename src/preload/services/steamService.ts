@@ -11,6 +11,20 @@ class SteamService {
         this.storeSteamCreds(e.data.value.steamUserKey, e.data.value.steamApiKey);
       }
     });
+
+    window.addEventListener('message', (e) => {
+      if (e.data.type === 'request-games-list') {
+        this.import().then((games) => {
+          window.postMessage(
+            {
+              type: 'games',
+              value: games,
+            },
+            '*'
+          );
+        });
+      }
+    });
   }
 
   async buildStore() {
@@ -56,7 +70,7 @@ class SteamService {
     for (const game of games) {
       const gameMetaDataResponse = (await this.retrieveMetadata(game)) as SteamGameMetaDataResponse;
 
-      if (gameMetaDataResponse[game.originalId]) {
+      if (gameMetaDataResponse && gameMetaDataResponse[game.originalId]) {
         const gameMetaData = gameMetaDataResponse[game.originalId].data;
         game.backgroundUrl =
           gameMetaData && gameMetaData.screenshots

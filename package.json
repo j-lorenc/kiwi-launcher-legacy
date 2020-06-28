@@ -35,6 +35,7 @@
     "keytar": "^6.0.1",
     "mousetrap": "^1.6.5",
     "react": "^16.13.1",
+    "react-anime": "^3.0.3",
     "react-dom": "^16.13.1",
     "uuid": "^8.1.0"
   },

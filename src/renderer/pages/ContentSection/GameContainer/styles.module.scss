@@ -1,0 +1,42 @@
+.gameDetails {
+  display: flex;
+  flex: 1;
+}
+
+.card-container {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+}
+
+.card-wrapper {
+  padding: 20px;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.45));
+  backdrop-filter: blur(10px);
+
+  padding: 30px;
+
+  &::before {
+    content: ' ';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &__header {
+    font-size: 36px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+  }
+}

@@ -12,6 +12,7 @@
   animation: background 0.4s;
   animation-fill-mode: forwards;
 
+  backdrop-filter: blur(1px);
   z-index: 110;
 }
 
