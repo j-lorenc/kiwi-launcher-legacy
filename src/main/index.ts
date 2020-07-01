@@ -33,6 +33,7 @@ export async function createWindow(): Promise<void> {
     height: 600,
     frame: false,
     show: false,
+    minWidth: 1200,
     webPreferences: {
       nodeIntegration: false,
       preload: path.join(__dirname, '../preload', 'preload.js'),

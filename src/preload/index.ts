@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import mousetrap from 'mousetrap';
 
-import steamService from './services/steamService';
+import steamService from './services/launchers/steam/steamService';
 
 window.addEventListener('DOMContentLoaded', async () => {
   steamService.attachEvents();

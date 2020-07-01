@@ -4,6 +4,9 @@ import withAnimation from '../../../hocs/withAnimation';
 import { AnimeProps } from 'react-anime';
 import styles from './styles.module.scss';
 import { CoverImage } from '../../../components/CoverImage/CoverImage';
+import { launchGame } from '../../../events/game';
+import PlayButtonIcon from 'feather-icons/dist/icons/play.svg';
+import DownloadButtonIcon from 'feather-icons/dist/icons/download.svg';
 
 export const GameDetails: React.FC<{ game: Game }> = ({ game }) => {
   return (
@@ -26,11 +29,52 @@ const Card: React.FC<{ game: Game }> = ({ game }) => {
 const InnerCard: React.FC<{ game: Game }> = ({ game }) => {
   return (
     <div className={styles['card__card-grid']}>
-      {game.coverUrl && (
-        <CoverImage className={styles['card__cover-image']} coverSrc={game.coverUrl} />
-      )}
-      <h1 className={`${styles['card__header']}`}> {game.name}</h1>
+      <div className={styles['card__card-grid__row']}>
+        {game.coverUrl && (
+          <CoverImage className={styles['card__cover-image']} coverSrc={game.coverUrl} />
+        )}
+        <h1 className={`${styles['card__header']}`}> {game.name}</h1>
+      </div>
+      <div className={styles['card__card-grid__row']}>
+        {game.installed ? (
+          <PlayButton id={game.originalId} />
+        ) : (
+          <InstallButton id={game.originalId} />
+        )}
+      </div>
     </div>
+  );
+};
+
+const InstallButton: React.FC<{ id: number | string }> = ({ id }) => {
+  return (
+    <button
+      onClick={() => {
+        launchGame(id);
+      }}
+      className={`${styles['card__launch-button']} ${styles['card__launch-button--install']}`}
+    >
+      <span>
+        <DownloadButtonIcon />
+        Install
+      </span>
+    </button>
+  );
+};
+
+const PlayButton: React.FC<{ id: number | string }> = ({ id }) => {
+  return (
+    <button
+      onClick={() => {
+        launchGame(id);
+      }}
+      className={`${styles['card__launch-button']} ${styles['card__launch-button--launch']}`}
+    >
+      <span>
+        <PlayButtonIcon />
+        Play
+      </span>
+    </button>
   );
 };
 

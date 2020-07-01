@@ -7,6 +7,8 @@ import { gamesListener } from '../../../listeners/games';
 
 import styles from './styles.module.scss';
 
+import cs from 'classnames';
+
 export const GamesList: React.FC<{
   selectedGame: Game;
   setSelectedGame: React.Dispatch<SelectedGameAction>;
@@ -56,11 +58,15 @@ const GameButton: React.FC<{
   selectedGame: Game;
   setSelectedGame: (game: Game) => void;
 }> = ({ game, selectedGame, setSelectedGame }) => {
+  const buttonClasses = cs({
+    [styles['games-list__game']]: true,
+    [styles['games-list__game--active']]: selectedGame.id === game.id,
+    [styles['games-list__game--installed']]: game.installed,
+  });
+
   return (
     <button
-      className={`${styles['games-list__game']} ${
-        selectedGame.id === game.id ? styles['games-list__game--active'] : ''
-      }`}
+      className={buttonClasses}
       onClick={() => {
         if (selectedGame.id !== game.id) {
           setSelectedGame(game);

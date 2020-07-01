@@ -6,3 +6,8 @@ declare module '*.scss' {
 declare module '*.png';
 
 declare module '*.svg';
+
+declare module 'vdf' {
+  export const parse: (str: string) => JSON;
+  export const dump: (json: JSON) => string;
+}

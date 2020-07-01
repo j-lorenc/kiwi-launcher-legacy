@@ -83,4 +83,56 @@ export interface Game {
   iconUrl?: string;
   backgroundUrl?: string;
   coverUrl?: string;
+  lastPlayed?: number;
+  installed?: boolean;
+}
+
+export interface SteamGameLibraries extends JSON {
+  LibraryFolders: {
+    [key: string]: string;
+  };
+}
+
+export interface SteamAcfFile extends JSON {
+  AppState: {
+    appid: number;
+    Universe: number;
+    name: string;
+    StateFlags: number;
+    installdir: string;
+    LastUpdated: number;
+    UpdateResult: number;
+    SizeOnDisk: number;
+    buildid: number;
+    LastOwner: number;
+    BytesToDownload: number;
+    BytesDownloaded: number;
+    AutoUpdateBehavior: number;
+    AllowOtherDownloadsWhileRunning: number;
+    ScheduledAutoUpdate: number;
+    UserConfig: {
+      name: string;
+      gameid: number;
+      language: string;
+    };
+  };
+}
+
+export interface SteamLocalConfig extends JSON {
+  UserLocalConfigStore: {
+    Software: {
+      Valve: {
+        Steam: {
+          apps: SteamLocalConfigApps;
+        };
+      };
+    };
+  };
+}
+
+export interface SteamLocalConfigApps {
+  [key: string]: {
+    LastPlayed: number;
+    playTime: number;
+  };
 }

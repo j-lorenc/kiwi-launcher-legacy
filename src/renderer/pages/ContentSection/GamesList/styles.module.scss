@@ -27,7 +27,7 @@
     flex: 1;
     text-align: left;
     font-family: Oswald;
-    color: white;
+    color: rgb(165, 165, 165);
     background: none;
     padding: 8px 10px;
     border: none;
@@ -62,6 +62,10 @@
         right: 0;
         border-left: 6px solid rgba(181, 230, 29, 1);
       }
+    }
+
+    &--installed {
+      color: white;
     }
 
     &--hidden {

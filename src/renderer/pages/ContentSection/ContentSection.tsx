@@ -9,7 +9,7 @@ const ContentSection: React.FC = () => {
   return (
     <section className={styles['content-section']}>
       <GamesList selectedGame={game} setSelectedGame={dispatch} />
-      <MemoGameDetails game={game} />
+      {game.id && <MemoGameDetails game={game} />}
     </section>
   );
 };
