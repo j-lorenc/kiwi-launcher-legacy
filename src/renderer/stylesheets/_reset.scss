@@ -1,0 +1,29 @@
+@import './fonts';
+html,
+body {
+  font-family: 'Oswald';
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Oswald';
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+h2 {
+}
+
+h3 {
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+h4 {
+}

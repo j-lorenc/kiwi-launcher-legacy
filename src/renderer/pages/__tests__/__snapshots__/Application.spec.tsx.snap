@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application should render correctly 1`] = `
+<div>
+  <header
+    className="header-bar"
+  >
+    <div
+      className="title-bar"
+    >
+      <div
+        className="title-bar__drag-bar"
+      >
+        <span
+          className="title-bar__title"
+        >
+          <img
+            className="title-bar__title__icon"
+            src="icon.png"
+          />
+          <span
+            className="title-bar__title__text"
+          >
+            Kiwi Launcher
+          </span>
+        </span>
+      </div>
+      <div
+        className="title-bar__window-button-container"
+      >
+        <button
+          className="title-bar__window-button title-bar__window-button--minimize"
+          onClick={[Function]}
+        >
+          <div>
+            <Icon src="minus.svg" />
+          </div>
+        </button>
+        <button
+          className="title-bar__window-button title-bar__window-button--maximize"
+          onClick={[Function]}
+        >
+          <div>
+            <Icon src="copy.svg" />
+          </div>
+        </button>
+        <button
+          className="title-bar__window-button title-bar__window-button--close"
+          onClick={[Function]}
+        >
+          <div>
+            <Icon src="x.svg" />
+          </div>
+        </button>
+      </div>
+    </div>
+    <div
+      className="settings-bar"
+    >
+      <div
+        className="search-container"
+      >
+        <div
+          className="search-container__icon search-container__icon--search"
+        >
+          <Icon src="search.svg" />
+        </div>
+        <input
+          onChange={[Function]}
+          type="type"
+          value=""
+        />
+        <div
+          className="search-container__icon search-container__icon--delete"
+          onClick={[Function]}
+        >
+          <Icon src="backspace.svg"
+            path="white"
+            width="24"
+          />
+        </div>
+      </div>
+    </div>
+  </header>
+  <h1>
+    
+  </h1>
+</div>
+`;

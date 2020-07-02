@@ -1,0 +1,90 @@
+.games-list-container {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  border-right: 1px solid rgba(0, 0, 0, 0.0755);
+  overflow-y: scroll;
+  width: 350px;
+  position: relative;
+  padding: 0;
+  display: flex;
+  backdrop-filter: blur(5px);
+}
+
+.games-list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &__list-item {
+    list-style: none;
+    display: flex;
+  }
+
+  &__game {
+    flex: 1;
+    text-align: left;
+    font-family: Oswald;
+    color: rgb(165, 165, 165);
+    background: none;
+    padding: 8px 10px;
+    border: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    letter-spacing: 0.35px;
+    text-shadow: 1px 1px 1px #000, -1px -1px 0 rgba(0, 0, 0, 0.1), 1px -1px 0 rgba(0, 0, 0, 0.1),
+      -1px 1px 0 rgba(0, 0, 0, 0.1), 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+    &:active,
+    &:focus {
+      border: none;
+      outline: none;
+    }
+
+    &:hover,
+    &--active {
+      transition: background-color 200ms;
+      background-color: rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+    }
+
+    &--active {
+      &::before {
+        content: ' ';
+        position: absolute;
+        height: 100%;
+        animation: active-game 0.16s ease-in 0s 1;
+        left: 0;
+        right: 0;
+        border-left: 6px solid rgba(181, 230, 29, 1);
+      }
+    }
+
+    &--installed {
+      color: white;
+    }
+
+    &--hidden {
+      display: none;
+    }
+
+    &__icon {
+      width: 22px;
+      margin-right: 10px;
+      border-radius: 3px;
+    }
+  }
+}
+
+@keyframes active-game {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 100%;
+  }
+}

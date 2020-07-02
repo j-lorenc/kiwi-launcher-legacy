@@ -1,0 +1,77 @@
+@import './stylesheets/reset';
+
+h1 {
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+button {
+  border: none;
+  background: none;
+
+  &:focus,
+  &:active {
+    border: none;
+    outline: none;
+  }
+}
+
+input {
+  font-family: 'SairaExtraCondensed';
+  font-size: 14px;
+
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-right: 1px solid rgba(255, 255, 255, 0.17);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+
+  letter-spacing: 0.5px;
+
+  outline: none;
+  border-radius: 3px;
+  transition: 0.15s width;
+
+  &:focus,
+  &:active,
+  &.active {
+    border-right: 1px solid rgba(181, 230, 29, 1);
+    border-bottom: 1px solid rgba(181, 230, 29, 1);
+
+    border-top: 1px solid rgba(180, 230, 29, 0.6);
+    border-left: 1px solid rgba(181, 230, 29, 0.6);
+
+    transition: 0.3s width;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  width: 15px;
+  background: rgba(0, 0, 0, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(40, 40, 40, 0.75);
+  border-radius: 1px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(70, 70, 70, 0.75);
+}

@@ -1,0 +1,74 @@
+.overlay {
+  content: ' ';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: background 0.4s;
+  animation-fill-mode: forwards;
+
+  backdrop-filter: blur(1px);
+  z-index: 110;
+}
+
+.headerBar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  svg {
+    transform: scale(0.6);
+    position: absolute;
+    right: 10px;
+  }
+}
+
+.modal {
+  color: white;
+  background: rgba(25, 25, 25, 0.995);
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+.root {
+  width: 300px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    margin-bottom: 5px;
+  }
+
+  input {
+    flex: 1;
+  }
+
+  button {
+    font-family: Oswald;
+    background: rgba(255, 255, 255, 0.04);
+    color: white;
+    padding: 5px 20px;
+    cursor: pointer;
+  }
+}
+
+@keyframes background {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
