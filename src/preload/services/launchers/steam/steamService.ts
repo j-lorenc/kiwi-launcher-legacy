@@ -1,7 +1,12 @@
 import { remote } from 'electron';
 import shell from 'child_process';
 import { v4 as uuid } from 'uuid';
-import { SteamApiGamesListReponse, Game, SteamGameMetaDataResponse } from '../../../../@types';
+import {
+  Game,
+  SteamGameMetaDataResponse,
+  SteamApiGame,
+  SteamGameMetaData,
+} from '../../../../@types';
 import path from 'path';
 import steamAuthService from './steamAuthService';
 import steamRegistryService from './steamRegistryService';
@@ -47,43 +52,71 @@ class SteamService {
     return path.join(await steamRegistryService.getInstallPath(), 'Steam.exe');
   }
 
-  async import() {
-    const gamesList = (await steamApiService.retrieveGamesList()) as SteamApiGamesListReponse;
-    const installedGamesList = await steamVdfService.getInstalledGamesFromVdfs();
+  async retrieveSavedGames(): Promise<Game[]> {
+    return [] as Game[];
+  }
 
-    const games = gamesList.response.games.map(
-      (game): Game => {
-        const installedGame = installedGamesList.find((installedGameListItem) => {
-          return (installedGameListItem.originalId as number) == game.appid;
-        });
+  async retrieveOwnedGames(): Promise<SteamApiGame[]> {
+    return (await steamApiService.retrieveGamesList()).response.games;
+  }
 
+  async parseNewGames(savedGames: Game[]): Promise<Game[]> {
+    const ownedGames: SteamApiGame[] = await this.retrieveOwnedGames();
+    const savedGameIds = savedGames.map((game) => game.originalId);
+
+    const newGames = ownedGames
+      .filter((ownedGame) => !savedGameIds.includes(ownedGame.appid))
+      .map((steamGame) => {
         return {
-          id: installedGame?.id ? installedGame.id : uuid(),
-          name: game.name,
-          originalId: game.appid,
-          iconUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`,
-          installed: installedGame?.installed,
-          lastPlayed: installedGame?.lastPlayed,
+          id: uuid(),
+          name: steamGame.name,
+          originalId: steamGame.appid,
+          iconUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${steamGame.appid}/${steamGame.img_icon_url}.jpg`,
         };
-      }
-    );
+      });
 
+    return newGames;
+  }
+
+  async addMetadataToGames(games: Game[]): Promise<Game[]> {
+    const gamesWithMetadata = [] as Game[];
     for (const game of games) {
-      const gameMetaDataResponse = (await this.retrieveMetadata(game)) as SteamGameMetaDataResponse;
+      const gameMetaData: SteamGameMetaData = (await this.retrieveMetadata(game))?.[
+        game.originalId.toString()
+      ]?.data;
 
-      if (gameMetaDataResponse && gameMetaDataResponse[game.originalId]) {
-        const gameMetaData = gameMetaDataResponse[game.originalId].data;
-        game.backgroundUrl =
-          gameMetaData && gameMetaData.screenshots
-            ? gameMetaData.screenshots[0].path_full
-            : gameMetaData
-            ? gameMetaData.background
-            : undefined;
-        game.coverUrl = gameMetaData?.header_image;
+      if (gameMetaData) {
+        gamesWithMetadata.push({
+          ...game,
+          backgroundUrl: gameMetaData.screenshots?.[0].path_full || gameMetaData.background,
+          coverUrl: gameMetaData?.header_image,
+        });
       }
     }
 
-    return games;
+    return gamesWithMetadata as Game[];
+  }
+
+  async updateGamePlayData(games: Game[]): Promise<Game[]> {
+    const installedGames = await this.getInstalledGamesList();
+
+    return games.map((game) => {
+      const installedGame = installedGames.find((iGame) => iGame.originalId == game.originalId);
+      game.installed = !!installedGame;
+
+      return game;
+    }) as Game[];
+  }
+
+  async import() {
+    const savedGames = await this.retrieveSavedGames();
+    const newGames = await this.parseNewGames(savedGames);
+    const newGamesWithMetaData = await this.addMetadataToGames(newGames);
+
+    const allGames = savedGames.concat(newGamesWithMetaData);
+    const gamesWithLiveData = await this.updateGamePlayData(allGames);
+
+    return gamesWithLiveData;
   }
 
   async retrieveMetadata(game: Game): Promise<SteamGameMetaDataResponse> {
