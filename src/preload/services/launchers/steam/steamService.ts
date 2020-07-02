@@ -51,15 +51,11 @@ class SteamService {
     const gamesList = (await steamApiService.retrieveGamesList()) as SteamApiGamesListReponse;
     const installedGamesList = await steamVdfService.getInstalledGamesFromVdfs();
 
-    console.log(installedGamesList);
-
     const games = gamesList.response.games.map(
       (game): Game => {
         const installedGame = installedGamesList.find((installedGameListItem) => {
           return (installedGameListItem.originalId as number) == game.appid;
         });
-
-        console.log(installedGame);
 
         return {
           id: installedGame?.id ? installedGame.id : uuid(),

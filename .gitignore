@@ -105,3 +105,8 @@ dist
 
 # assets
 src/renderer/assets
+
+#release
+release/
+
+build/

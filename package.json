@@ -9,7 +9,15 @@
     "start": "cross-env START_HOT=1 npm run start-renderer-dev",
     "test": "jest --projects config/jest/jest-renderer.test.config.js --watchAll --verbose",
     "e2e": "jest --projects config/jest/jest-main.test.config.js --watchAll --verbose",
-    "test:all": "jest --watchAll --verbose"
+    "test:all": "jest --watchAll --verbose",
+    "build-main": "cross-env NODE_ENV=production webpack --config config/webpack/main/webpack.main.prod.config.js",
+    "build-renderer": "cross-env NODE_ENV=production webpack --config config/webpack/renderer/webpack.renderer.prod.config.js",
+    "build-preload": "cross-env NODE_ENV=production webpack --config config/webpack/preload/webpack.preload.config.js",
+    "build": "npm run build-main && npm run build-renderer",
+    "rebuild": "electron-rebuild",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "repository": {
     "type": "git",
@@ -34,7 +42,6 @@
     "@types/uuid": "^8.0.0",
     "@types/winreg": "^1.2.30",
     "classnames": "^2.2.6",
-    "electron": "^9.0.4",
     "eslint": "^7.2.0",
     "keytar": "^6.0.1",
     "mousetrap": "^1.6.5",
@@ -64,6 +71,8 @@
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
     "css-loader": "^3.6.0",
+    "electron": "^9.0.4",
+    "electron-builder": "^22.7.0",
     "electron-devtools-installer": "^3.0.0",
     "electron-is-dev": "^1.2.0",
     "electron-store": "^5.2.0",
