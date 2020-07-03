@@ -12,8 +12,15 @@ import steamAuthService from './steamAuthService';
 import steamRegistryService from './steamRegistryService';
 import steamApiService from './steamApiService';
 import steamVdfService from './steamVdfService';
+import Store from 'electron-store';
 
 class SteamService {
+  store: Store;
+
+  constructor() {
+    this.store = new Store();
+  }
+
   attachEvents() {
     window.addEventListener('message', (e) => {
       if (e.data.type === 'submit-steam-creds') {
@@ -28,8 +35,17 @@ class SteamService {
       }
     });
 
-    window.addEventListener('message', (e) => {
+    window.addEventListener('message', async (e) => {
       if (e.data.type === 'request-games-list') {
+        const existingGames = await this.retrieveSavedGames();
+        window.postMessage(
+          {
+            type: 'games',
+            value: existingGames,
+          },
+          '*'
+        );
+
         this.import().then((games) => {
           window.postMessage(
             {
@@ -53,7 +69,7 @@ class SteamService {
   }
 
   async retrieveSavedGames(): Promise<Game[]> {
-    return [] as Game[];
+    return this.store.get('games', []) as Game[];
   }
 
   async retrieveOwnedGames(): Promise<SteamApiGame[]> {
@@ -108,6 +124,10 @@ class SteamService {
     }) as Game[];
   }
 
+  saveGames(games: Game[]) {
+    this.store.set('games', games);
+  }
+
   async import() {
     const savedGames = await this.retrieveSavedGames();
     const newGames = await this.parseNewGames(savedGames);
@@ -115,6 +135,7 @@ class SteamService {
 
     const allGames = savedGames.concat(newGamesWithMetaData);
     const gamesWithLiveData = await this.updateGamePlayData(allGames);
+    this.saveGames(gamesWithLiveData);
 
     return gamesWithLiveData;
   }

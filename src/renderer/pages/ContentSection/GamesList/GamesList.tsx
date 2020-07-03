@@ -17,17 +17,17 @@ export const GamesList: React.FC<{
   const { state: selectedGame, dispatch } = useSelectedGameContext();
   const { state: filterState } = useFilterContext();
 
-  if (!games.length) {
-    requestGamesList();
-    gamesListener(setGames);
-  }
-
   const setSelectedGame = (game: Game) => {
     dispatch({
       type: 'setSelectedGame',
       payload: game,
     });
   };
+
+  if (!games.length) {
+    requestGamesList();
+    gamesListener(setGames, setSelectedGame);
+  }
 
   return (
     <aside className={styles['games-list-container']}>
