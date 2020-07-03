@@ -22,20 +22,20 @@ class SteamService {
   }
 
   attachEvents() {
-    window.addEventListener('message', (e) => {
+    window.addEventListener('message', async (e) => {
       if (e.data.type === 'submit-steam-creds') {
         steamAuthService.storeSteamCreds(e.data.value.steamUserKey, e.data.value.steamApiKey);
       }
-    });
 
-    window.addEventListener('message', (e) => {
       if (e.data.type === 'launch-game') {
         this.launchGame(e.data.value);
         remote.getCurrentWindow().minimize();
       }
-    });
 
-    window.addEventListener('message', async (e) => {
+      if (e.data.type === 'open-steam-store') {
+        shell.exec(`start steam://openurl/https://store.steampowered.com/`, {});
+      }
+
       if (e.data.type === 'request-games-list') {
         const existingGames = await this.retrieveSavedGames();
         window.postMessage(
@@ -151,7 +151,7 @@ class SteamService {
   async launchGame(id: string | number) {
     const steamInstallPath = await this.getInstallPath();
 
-    shell.spawn(steamInstallPath, ['-applaunch', id.toString()], {
+    shell.exec(`start steam://run/${id}`, {
       cwd: steamInstallPath.split('\\').slice(0, -1).join('\\'),
     });
   }
