@@ -6,12 +6,18 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   position: relative;
 
   backdrop-filter: blur(20px);
 
   z-index: 1;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   &:before {
     content: '';
