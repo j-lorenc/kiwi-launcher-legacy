@@ -1,4 +1,4 @@
-import { generateEncryptionKey } from '../../keytar';
+import { generateEncryptionKey } from '../../keytar/keytar';
 import Store from 'electron-store';
 
 class SteamAuthService {

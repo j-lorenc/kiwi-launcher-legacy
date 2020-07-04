@@ -1,4 +1,3 @@
-import { remote } from 'electron';
 import shell from 'child_process';
 import { v4 as uuid } from 'uuid';
 import {
@@ -8,7 +7,6 @@ import {
   SteamGameMetaData,
 } from '../../../../@types';
 import path from 'path';
-import steamAuthService from './steamAuthService';
 import steamRegistryService from './steamRegistryService';
 import steamApiService from './steamApiService';
 import steamVdfService from './steamVdfService';
@@ -19,44 +17,6 @@ class SteamService {
 
   constructor() {
     this.store = new Store();
-  }
-
-  attachEvents() {
-    window.addEventListener('message', async (e) => {
-      if (e.data.type === 'submit-steam-creds') {
-        steamAuthService.storeSteamCreds(e.data.value.steamUserKey, e.data.value.steamApiKey);
-      }
-
-      if (e.data.type === 'launch-game') {
-        this.launchGame(e.data.value);
-        remote.getCurrentWindow().minimize();
-      }
-
-      if (e.data.type === 'open-steam-store') {
-        shell.exec(`start steam://openurl/https://store.steampowered.com/`, {});
-      }
-
-      if (e.data.type === 'request-games-list') {
-        const existingGames = await this.retrieveSavedGames();
-        window.postMessage(
-          {
-            type: 'games',
-            value: existingGames,
-          },
-          '*'
-        );
-
-        this.import().then((games) => {
-          window.postMessage(
-            {
-              type: 'games',
-              value: games,
-            },
-            '*'
-          );
-        });
-      }
-    });
   }
 
   async isInstalled(): Promise<boolean> {

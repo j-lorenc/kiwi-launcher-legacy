@@ -1,4 +1,4 @@
-import RegistryService from '../../registryService';
+import RegistryService from '../../registry/registry';
 import Registry from 'winreg';
 
 class SteamRegistryService {

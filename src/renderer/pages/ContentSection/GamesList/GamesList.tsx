@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Game, SelectedGameAction } from '../../../../@types';
 import { useSelectedGameContext } from '../../../contexts/selectedGame';
 import { useFilterContext } from '../../../contexts/filteredGame';
-import { requestGamesList } from '../../../events/window';
+import { requestGamesList } from '../../../events/game';
 import { gamesListener } from '../../../listeners/games';
 
 import styles from './styles.module.scss';

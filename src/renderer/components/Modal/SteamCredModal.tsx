@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal, { ModalProps } from './Modal';
 import styles from './styles.module.scss';
+import { submitSteamCreds as submitSteamCredsEvents } from '../../events/game';
 
 const SteamCredModal = ({ active, onClose }: ModalProps): JSX.Element => {
   const [steamUserKey, setSteamUserKey] = useState<string>('');
@@ -8,13 +9,7 @@ const SteamCredModal = ({ active, onClose }: ModalProps): JSX.Element => {
 
   const submitSteamCreds = () => {
     if (steamApiKey && steamUserKey) {
-      window.postMessage(
-        {
-          type: 'submit-steam-creds',
-          value: { steamUserKey, steamApiKey },
-        },
-        '*'
-      );
+      submitSteamCredsEvents(steamUserKey, steamApiKey);
     }
   };
 
