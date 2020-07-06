@@ -7,7 +7,7 @@ import steamAuthService from './steamAuthService';
 import {
   SteamGameLibraries,
   SteamAcfFile,
-  Game,
+  GameInstallData,
   SteamLocalConfig,
   SteamLocalConfigApps,
 } from '../../../../@types';
@@ -65,7 +65,7 @@ class SteamVdfService {
     return apps;
   }
 
-  async getInstalledGamesFromVdfs(): Promise<Game[]> {
+  async getInstalledGamesFromVdfs(): Promise<GameInstallData[]> {
     const acfFiles = await this.getAcfFilesFromSteamLibraries();
     const apps = await this.getConfigFromSteamLibraries();
 
@@ -93,7 +93,7 @@ class SteamVdfService {
           name,
           lastPlayed: lastSession,
           installed: true,
-        } as Game;
+        } as GameInstallData;
 
         return installedGame;
       });

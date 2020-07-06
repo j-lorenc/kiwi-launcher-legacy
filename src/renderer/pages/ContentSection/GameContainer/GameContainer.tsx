@@ -41,7 +41,32 @@ const InnerCard: React.FC<{ game: Game }> = ({ game }) => {
         ) : (
           <InstallButton id={game.originalId} />
         )}
+        <LiveData className={styles['card__live-data']} game={game} />
       </div>
+    </div>
+  );
+};
+
+const LiveData: React.FC<{ className: string; game: Game }> = ({ className, game }) => {
+  return (
+    <div className={className}>
+      <span className={styles['card__live-data__header']}>Launcher</span>
+      <span>Steam</span>
+
+      {game.lastPlayed && (
+        <>
+          <span className={styles['card__live-data__header']}>Last Played</span>
+          <span>{game.lastPlayed ? new Date(game.lastPlayed * 1000).toDateString() : null}</span>
+        </>
+      )}
+      {!!game.playtime && (
+        <>
+          <span className={styles['card__live-data__header']}>Played for</span>
+          <span>
+            {game.playtime ? `${Math.floor(game.playtime / 60)}h ${game.playtime % 60}m` : null}
+          </span>
+        </>
+      )}
     </div>
   );
 };

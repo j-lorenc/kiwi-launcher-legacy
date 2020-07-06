@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, protocol } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import * as isDev from 'electron-is-dev';
@@ -64,6 +64,10 @@ export async function createWindow(): Promise<void> {
 
   win.on('closed', () => {
     win = null;
+  });
+
+  protocol.interceptFileProtocol('file', (req, callback) => {
+    callback(decodeURI(req.url.substring(8)));
   });
 }
 

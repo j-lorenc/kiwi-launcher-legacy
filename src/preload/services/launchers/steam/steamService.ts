@@ -5,6 +5,7 @@ import {
   SteamGameMetaDataResponse,
   SteamApiGame,
   SteamGameMetaData,
+  GameInstallData,
 } from '../../../../@types';
 import path from 'path';
 import steamRegistryService from './steamRegistryService';
@@ -37,19 +38,35 @@ class SteamService {
   }
 
   async parseNewGames(savedGames: Game[]): Promise<Game[]> {
-    const ownedGames: SteamApiGame[] = await this.retrieveOwnedGames();
-    const savedGameIds = savedGames.map((game) => game.originalId);
+    const ownedApiGames: SteamApiGame[] = await this.retrieveOwnedGames();
 
-    const newGames = ownedGames
-      .filter((ownedGame) => !savedGameIds.includes(ownedGame.appid))
-      .map((steamGame) => {
+    const savedGameIds = savedGames.map((game) => game.originalId);
+    const installedGameData = await this.getInstalledGamesList();
+
+    const ownedGames: Game[] = ownedApiGames.map((steamGame) => {
+      return {
+        id: uuid(),
+        name: steamGame.name,
+        originalId: steamGame.appid,
+      };
+    });
+
+    const installedGamesNewGames: Game[] = installedGameData
+      .map((installedGame) => {
         return {
           id: uuid(),
-          name: steamGame.name,
-          originalId: steamGame.appid,
-          iconUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${steamGame.appid}/${steamGame.img_icon_url}.jpg`,
+          name: installedGame.name,
+          originalId: installedGame.originalId,
         };
+      })
+      .filter((game) => {
+        const ownedGamesIds = ownedGames.map((ownedGame) => ownedGame.originalId.toString());
+        return !ownedGamesIds.includes(game.originalId.toString());
       });
+
+    const newGames = ownedGames
+      .concat(installedGamesNewGames)
+      .filter((game) => !savedGameIds.includes(game.originalId));
 
     return newGames;
   }
@@ -62,10 +79,17 @@ class SteamService {
       ]?.data;
 
       if (gameMetaData) {
+        const iconUrl = `file://${path.join(
+          await steamRegistryService.getInstallPath(),
+          'appcache\\librarycache',
+          `${game.originalId}_icon.jpg`
+        )}`;
+
         gamesWithMetadata.push({
           ...game,
           backgroundUrl: gameMetaData.screenshots?.[0].path_full || gameMetaData.background,
           coverUrl: gameMetaData?.header_image,
+          iconUrl,
         });
       }
     }
@@ -75,11 +99,15 @@ class SteamService {
 
   async updateGamePlayData(games: Game[]): Promise<Game[]> {
     const installedGames = await this.getInstalledGamesList();
+    const ownedApiGames: SteamApiGame[] = await this.retrieveOwnedGames();
 
     return games.map((game) => {
       const installedGame = installedGames.find((iGame) => iGame.originalId == game.originalId);
-      game.installed = !!installedGame;
+      const playtimeGame = ownedApiGames.find((ownedGame) => ownedGame.appid == game.originalId);
 
+      game.installed = !!installedGame;
+      game.lastPlayed = installedGame?.lastPlayed;
+      game.playtime = playtimeGame?.playtime_forever;
       return game;
     }) as Game[];
   }
@@ -104,7 +132,7 @@ class SteamService {
     return await steamApiService.fetchGameData(game.originalId as number);
   }
 
-  async getInstalledGamesList(): Promise<Game[]> {
+  async getInstalledGamesList(): Promise<GameInstallData[]> {
     return await steamVdfService.getInstalledGamesFromVdfs();
   }
 

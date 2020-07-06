@@ -84,7 +84,16 @@ export interface Game {
   backgroundUrl?: string;
   coverUrl?: string;
   lastPlayed?: number;
+  playtime?: number;
   installed?: boolean;
+}
+
+export interface GameInstallData {
+  originalId: string | number;
+  name: string;
+  installed: boolean;
+  playtime?: number;
+  lastPlayed?: number;
 }
 
 export interface SteamGameLibraries extends JSON {
