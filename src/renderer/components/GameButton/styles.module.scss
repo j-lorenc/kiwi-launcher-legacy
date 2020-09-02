@@ -1,0 +1,46 @@
+.launch-button {
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 40px;
+  z-index: 100;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+  }
+
+  svg {
+    position: absolute;
+    left: -25px;
+    filter: drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.45));
+    transform: scale(0.65);
+  }
+
+  &--launch {
+    background: linear-gradient(180deg, rgb(136, 211, 24), rgb(108, 168, 19));
+
+    &:hover {
+      transition: background 1s;
+      background: linear-gradient(180deg, rgb(108, 168, 19), rgb(85, 133, 14));
+    }
+  }
+
+  &--install {
+    background: linear-gradient(180deg, rgb(26, 149, 206), rgb(23, 120, 165));
+
+    &:hover {
+      background: linear-gradient(180deg, rgb(23, 120, 165), rgb(16, 87, 121));
+    }
+  }
+}

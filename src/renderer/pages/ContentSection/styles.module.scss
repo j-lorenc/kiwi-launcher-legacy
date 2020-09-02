@@ -1,5 +1,13 @@
 .content-section {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.game-lists {
+  padding: 30px 0;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
 }

@@ -7,7 +7,9 @@ export const gamesListener = (
   window.addEventListener('message', (e) => {
     if (e.data.type === 'games') {
       setGames(e.data.value);
-      setSelectedGame(e.data.value[0]);
+      setSelectedGame(
+        (JSON.parse(localStorage.getItem('selectedGame') || '') as Game) || e.data.value[0]
+      );
     }
   });
 };

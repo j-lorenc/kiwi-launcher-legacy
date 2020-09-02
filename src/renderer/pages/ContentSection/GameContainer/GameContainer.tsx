@@ -4,9 +4,7 @@ import withAnimation from '../../../hocs/withAnimation';
 import { AnimeProps } from 'react-anime';
 import styles from './styles.module.scss';
 import { CoverImage } from '../../../components/CoverImage/CoverImage';
-import { launchGame } from '../../../events/game';
-import PlayButtonIcon from 'feather-icons/dist/icons/play.svg';
-import DownloadButtonIcon from 'feather-icons/dist/icons/download.svg';
+import { InstallButton, PlayButton } from '../../../components/GameButton/GameButton';
 
 export const GameDetails: React.FC<{ game: Game }> = ({ game }) => {
   return (
@@ -52,54 +50,30 @@ const LiveData: React.FC<{ className: string; game: Game }> = ({ className, game
     <div className={className}>
       <span className={styles['card__live-data__header']}>Launcher</span>
       <span>Steam</span>
-
-      {game.lastPlayed && (
-        <>
-          <span className={styles['card__live-data__header']}>Last Played</span>
-          <span>{game.lastPlayed ? new Date(game.lastPlayed * 1000).toDateString() : null}</span>
-        </>
-      )}
       {!!game.playtime && (
         <>
           <span className={styles['card__live-data__header']}>Played for</span>
           <span>
-            {game.playtime ? `${Math.floor(game.playtime / 60)}h ${game.playtime % 60}m` : null}
+            {game.playtime &&
+              !!Math.floor(game.playtime / 60) &&
+              `${Math.floor(game.playtime / 60)} hour${
+                Math.floor(game.playtime / 60) > 1 ? 's' : ''
+              }`}
+            {game.playtime &&
+              !Math.floor(game.playtime / 60) &&
+              `${game.playtime % 60} minute${game.playtime % 60 > 1 ? 's' : ''}`}
+          </span>
+        </>
+      )}
+      {game.lastPlayed && (
+        <>
+          <span className={styles['card__live-data__header']}>Last Played</span>
+          <span>
+            {game.lastPlayed ? new Date(game.lastPlayed * 1000).toLocaleDateString() : null}
           </span>
         </>
       )}
     </div>
-  );
-};
-
-const InstallButton: React.FC<{ id: number | string }> = ({ id }) => {
-  return (
-    <button
-      onClick={() => {
-        launchGame(id);
-      }}
-      className={`${styles['card__launch-button']} ${styles['card__launch-button--install']}`}
-    >
-      <span>
-        <DownloadButtonIcon />
-        Install
-      </span>
-    </button>
-  );
-};
-
-const PlayButton: React.FC<{ id: number | string }> = ({ id }) => {
-  return (
-    <button
-      onClick={() => {
-        launchGame(id);
-      }}
-      className={`${styles['card__launch-button']} ${styles['card__launch-button--launch']}`}
-    >
-      <span>
-        <PlayButtonIcon />
-        Play
-      </span>
-    </button>
   );
 };
 

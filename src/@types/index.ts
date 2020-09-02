@@ -4,7 +4,9 @@ export interface GameFilter {
   gameName: string;
 }
 
-export type FilterAction = { type: 'filter'; payload: string };
+export interface WindowSettings {
+  currentWindow: CurrentWindow;
+}
 
 export interface FilterContextType {
   state: GameFilter;
@@ -16,7 +18,21 @@ export interface SelectedGameContextType {
   dispatch: Dispatch<SelectedGameAction>;
 }
 
+export interface WindowContextType {
+  state: WindowSettings;
+  dispatch: Dispatch<SetCurrentWindowAction>;
+}
+
+export type FilterAction = { type: 'filter'; payload: string };
+
 export type SelectedGameAction = { type: 'setSelectedGame'; payload: Game };
+
+export type SetCurrentWindowAction = { type: 'setCurrentWindow'; payload: CurrentWindow };
+
+export enum CurrentWindow {
+  HOME,
+  LIST,
+}
 
 export interface SteamApiGamesListReponse {
   response: SteamApiGamesList;

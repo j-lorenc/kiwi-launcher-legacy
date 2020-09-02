@@ -8,10 +8,17 @@ import SelectedGameContext, {
   initialGameSelected,
   useSelectedGameContext,
 } from '../contexts/selectedGame';
+import WindowContext, {
+  windowReducer,
+  initialWindowSettings,
+  useWindowContext,
+} from '../contexts/currentWindow';
+
 import FooterBar from './FooterBar/FooterBar';
 import ContentSection from './ContentSection/ContentSection';
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { CurrentWindow } from '../../@types';
 
 export const Application: () => JSX.Element = () => {
   const [state, dispatch] = useReducer(filterReducer, initialFilter);
@@ -19,18 +26,21 @@ export const Application: () => JSX.Element = () => {
     selectedGameReducer,
     initialGameSelected
   );
+  const [windowState, windowDispatch] = useReducer(windowReducer, initialWindowSettings);
 
   return (
     <FilterContext.Provider value={{ state, dispatch }}>
       <SelectedGameContext.Provider
         value={{ state: selectedGameState, dispatch: selectedGameDispatch }}
       >
-        <div className={styles['app-container']}>
-          <BackgroundImageContainer />
-          <HeaderBar title="Kiwi Launcher" />
-          <ContentSection />
-          <FooterBar />
-        </div>
+        <WindowContext.Provider value={{ state: windowState, dispatch: windowDispatch }}>
+          <div className={styles['app-container']}>
+            <BackgroundImageContainer />
+            <HeaderBar title="Kiwi Launcher" />
+            <ContentSection />
+            <FooterBar />
+          </div>
+        </WindowContext.Provider>
       </SelectedGameContext.Provider>
     </FilterContext.Provider>
   );
@@ -38,6 +48,9 @@ export const Application: () => JSX.Element = () => {
 
 const BackgroundImageContainer: React.FC = () => {
   const { state: selectedGame } = useSelectedGameContext();
+  const { state: windowState } = useWindowContext();
+
+  if (windowState.currentWindow === CurrentWindow.HOME) return null;
 
   return (
     <TransitionGroup component={null}>

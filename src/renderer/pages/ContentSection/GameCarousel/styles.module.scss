@@ -1,0 +1,102 @@
+.game-container {
+  padding: 0 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.game-container__header {
+  color: rgb(210, 210, 210);
+  font-size: 16px;
+  margin: 0;
+
+  font-family: Lato;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+.games-list {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  margin: 0 -200px;
+  align-items: center;
+
+  animation: fade-in 1s, slide-up 0.5s;
+}
+
+.games-list__nav {
+  position: absolute;
+  content: ' ';
+  z-index: 10;
+  top: 30px;
+  bottom: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.99);
+    transition: background 0.3s;
+  }
+
+  &--backwards {
+    left: -10px;
+  }
+
+  &--forwards {
+    right: -10px;
+  }
+}
+
+.games-list__image-container {
+  display: inline-block;
+  margin: 30px 5px;
+  position: relative;
+  cursor: pointer;
+  flex: 0 0 220px;
+  z-index: 1;
+  transition: z-index 0.05s step-end, transform 0.05s linear;
+}
+
+.games-list__image-container:first-child {
+  margin-left: 10px;
+}
+
+.games-list__image-container::after {
+  position: absolute;
+  content: ' ';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.75), inset 0px 0px 40px rgba(0, 0, 0, 1);
+  z-index: 2;
+}
+
+.games-list__image-container:hover {
+  max-height: 300px;
+  transition: z-index 0.1s step-start, transform 0.15s linear;
+  transform: scale(1.45);
+  z-index: 3;
+}
+
+.games-list__image-container:hover::after {
+  z-index: 4;
+}
+
+.games-list__image-container img {
+  width: 100%;
+  transition: border 0.1s;
+  border: 3px solid rgba(0, 166, 231, 0);
+}
+
+.games-list__image-container:hover img,
+.games-list__image-container--active img {
+  transition: border 0.1s;
+  border: 3px solid rgba(0, 166, 231, 1);
+}

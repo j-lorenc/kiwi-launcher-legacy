@@ -6,12 +6,17 @@ import CloseIcon from 'feather-icons/dist/icons/x.svg';
 import MaximizeIcon from 'feather-icons/dist/icons/copy.svg';
 import MinimizeIcon from 'feather-icons/dist/icons/minus.svg';
 
+import HomeIcon from 'feather-icons/dist/icons/home.svg';
+import ListIcon from 'feather-icons/dist/icons/list.svg';
+
 import SearchIcon from 'feather-icons/dist/icons/search.svg';
 import DeleteIcon from '@fortawesome/fontawesome-pro/svgs/regular/backspace.svg';
 
 import { close, minimize, maximize } from '../../events/window';
 
 import { useFilterContext } from '../../contexts/filteredGame';
+import { useWindowContext } from '../../contexts/currentWindow';
+import { CurrentWindow } from '../../../@types';
 
 const WindowButtons: React.FC = () => (
   <div className={styles['title-bar__window-button-container']}>
@@ -58,6 +63,7 @@ const DragBar: React.FC<{ title: string }> = ({ title }) => (
 
 const Header: React.FC<{ title: string }> = ({ title }) => {
   const filterContext = useFilterContext();
+  const windowContext = useWindowContext();
   const filterActive = filterContext.state.gameName.length > 0;
 
   return (
@@ -78,6 +84,18 @@ const Header: React.FC<{ title: string }> = ({ title }) => {
             type="type"
             value={filterContext.state.gameName}
             onChange={(e) => {
+              if (e.target.value.length === 0) {
+                windowContext.dispatch({
+                  type: 'setCurrentWindow',
+                  payload: CurrentWindow.HOME,
+                });
+              } else {
+                windowContext.dispatch({
+                  type: 'setCurrentWindow',
+                  payload: CurrentWindow.LIST,
+                });
+              }
+
               filterContext.dispatch({
                 type: 'filter',
                 payload: e.target.value,
@@ -95,6 +113,42 @@ const Header: React.FC<{ title: string }> = ({ title }) => {
           >
             <DeleteIcon width="24" path="white" />
           </div>
+        </div>
+        <div className={styles['icon-list']}>
+          <HomeIcon
+            width={20}
+            height={20}
+            viewBox="0 0 24 24"
+            stroke-width={1.5}
+            stroke={
+              windowContext.state.currentWindow === CurrentWindow.HOME ? '#c4f37f' : '#3a3a3a'
+            }
+            onClick={() => {
+              windowContext.dispatch({
+                type: 'setCurrentWindow',
+                payload: CurrentWindow.HOME,
+              });
+              filterContext.dispatch({
+                type: 'filter',
+                payload: '',
+              });
+            }}
+          />
+          <ListIcon
+            width={20}
+            height={20}
+            viewBox="0 0 24 24"
+            stroke-width={1.5}
+            stroke={
+              windowContext.state.currentWindow === CurrentWindow.LIST ? '#c4f37f' : '#3a3a3a'
+            }
+            onClick={() => {
+              windowContext.dispatch({
+                type: 'setCurrentWindow',
+                payload: CurrentWindow.LIST,
+              });
+            }}
+          />
         </div>
       </div>
     </header>

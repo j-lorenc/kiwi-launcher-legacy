@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { Game, SelectedGameAction } from '../../../../@types';
+import React from 'react';
+import { Game } from '../../../../@types';
 import { useSelectedGameContext } from '../../../contexts/selectedGame';
 import { useFilterContext } from '../../../contexts/filteredGame';
-import { requestGamesList } from '../../../events/game';
-import { gamesListener } from '../../../listeners/games';
 
 import styles from './styles.module.scss';
 
@@ -11,23 +9,11 @@ import cs from 'classnames';
 
 export const GamesList: React.FC<{
   selectedGame: Game;
-  setSelectedGame: React.Dispatch<SelectedGameAction>;
-}> = () => {
-  const [games, setGames] = useState<Game[]>([] as Game[]);
+  games: Game[];
+  setSelectedGame: (game: Game) => void;
+}> = ({ games, setSelectedGame }) => {
   const { state: selectedGame, dispatch } = useSelectedGameContext();
   const { state: filterState } = useFilterContext();
-
-  const setSelectedGame = (game: Game) => {
-    dispatch({
-      type: 'setSelectedGame',
-      payload: game,
-    });
-  };
-
-  if (!games.length) {
-    requestGamesList();
-    gamesListener(setGames, setSelectedGame);
-  }
 
   return (
     <aside className={styles['games-list-container']}>

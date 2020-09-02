@@ -1,5 +1,9 @@
 @import './stylesheets/reset';
 
+* {
+  user-select: none;
+}
+
 h1 {
   margin: 0;
 }
