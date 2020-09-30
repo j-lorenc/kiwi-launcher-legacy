@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Game, SelectedGameAction } from '../../../../@types';
+import { SelectedGameAction } from '../../../../@types';
+import { Game } from '../../../../@types/models';
 import { useSelectedGameContext } from '../../../contexts/selectedGame';
 import { useFilterContext } from '../../../contexts/filteredGame';
 import { requestGamesList } from '../../../events/game';

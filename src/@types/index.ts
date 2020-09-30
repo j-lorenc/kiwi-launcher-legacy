@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-
+import { Game } from './models';
 export interface GameFilter {
   gameName: string;
 }
@@ -40,7 +40,7 @@ export interface SteamApiGame {
 }
 
 export interface SteamGameMetaDataResponse {
-  [key: string]: {
+  [key: number]: {
     data: SteamGameMetaData;
   };
 }
@@ -74,18 +74,7 @@ export interface SteamGameMetaData {
       path_thumbnail: string;
     }
   ];
-}
-
-export interface Game {
-  id: string;
-  name: string;
-  originalId: string | number;
-  iconUrl?: string;
-  backgroundUrl?: string;
-  coverUrl?: string;
-  lastPlayed?: number;
-  playtime?: number;
-  installed?: boolean;
+  steam_appid: number;
 }
 
 export interface GameInstallData {
@@ -144,4 +133,19 @@ export interface SteamLocalConfigApps {
     LastPlayed: number;
     playTime: number;
   };
+}
+
+export interface Launcher {
+  launcher_id: string;
+  name: string;
+}
+
+export interface DBGame {
+  game_id: string;
+  name: string;
+  launcher_id: string;
+  original_id: string;
+  icon_url?: string;
+  background_url?: string;
+  cover_url?: string;
 }

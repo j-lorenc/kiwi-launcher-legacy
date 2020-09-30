@@ -14,6 +14,7 @@
     "sourceMap": true,
     "resolveJsonModule": true
   },
+  "types": ["node-ipc"],
   "include": ["./src/main/**/*", "./src/preload/**/*", "./src/renderer/**/*", "src/global.d.ts"],
   "exclude": ["node_modules", "config/**/*.ts"]
 }
