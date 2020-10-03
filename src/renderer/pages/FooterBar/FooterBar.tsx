@@ -5,9 +5,13 @@ import StoreIcon from '@fortawesome/fontawesome-pro/svgs/light/store-alt.svg';
 import SyncIcon from '@fortawesome/fontawesome-pro/svgs/light/sync.svg';
 import SteamCredModal from '../../components/Modal/SteamCredModal';
 import { showSteamStore, refreshGamesList } from '../../events/game';
+import { windowListener } from '../../listeners/window';
 
 const FooterBar: React.FC = () => {
   const [showSteamCredModal, setShowSteamCredModal] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>();
+
+  windowListener(setMessage);
 
   return (
     <>
@@ -22,6 +26,7 @@ const FooterBar: React.FC = () => {
             <SyncIcon width="12" fill="rgba(255,255,255,0.6)" />
           </button>
         </div>
+        <div>{message}</div>
         <div>
           <button
             onClick={() => {

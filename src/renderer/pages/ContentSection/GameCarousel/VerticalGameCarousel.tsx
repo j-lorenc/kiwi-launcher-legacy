@@ -4,8 +4,9 @@ import { Game } from '../../../../@types/models';
 import ChevronLeftIcon from 'feather-icons/dist/icons/chevron-left.svg';
 import ChevronRightIcon from 'feather-icons/dist/icons/chevron-right.svg';
 import styles from './styles.module.scss';
+import cs from 'classnames';
 
-const GameCarousel: React.FC<{
+const VerticalGameCarousel: React.FC<{
   selectedGame: Game;
   games: Game[];
   setSelectedGame: (game: Game) => void;
@@ -20,15 +21,20 @@ const GameCarousel: React.FC<{
         </div>
         <div className={styles['games-list']}>
           {games.map((game) => {
+            const verticalCoverStyles = cs({
+              [styles['games-list__image-container']]: true,
+              [styles['games-list__image-container--active']]: game.id === selectedGame.id,
+              [styles['games-list__image-container--shadow']]: game.coverUrl,
+              [styles['games-list__image-container--vertical']]: true,
+            });
+
             return (
               <div
                 key={game.id}
-                className={`${styles['games-list__image-container']} ${
-                  game.id === selectedGame.id ? styles['games-list__image-container--active'] : ''
-                } ${game.coverUrl && styles['games-list__image-container--shadow']}`}
+                className={verticalCoverStyles}
                 onClick={() => setSelectedGame(game)}
               >
-                {game.coverUrl ? <img src={game.coverUrl} /> : <div>{game.name}</div>}
+                {game.coverUrl ? <img src={game.verticalUrl} /> : <div>{game.name}</div>}
               </div>
             );
           })}
@@ -41,4 +47,4 @@ const GameCarousel: React.FC<{
   );
 };
 
-export default GameCarousel;
+export default VerticalGameCarousel;

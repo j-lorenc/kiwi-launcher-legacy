@@ -21,7 +21,7 @@
   overflow: hidden;
   display: flex;
   margin: 0 -200px;
-  align-items: center;
+  align-items: stretch;
 
   animation: fade-in 1s, slide-up 0.5s;
 }
@@ -54,7 +54,8 @@
 }
 
 .games-list__image-container {
-  display: inline-block;
+  display: flex;
+  align-items: flex-end;
   margin: 30px 5px;
   position: relative;
   cursor: pointer;
@@ -67,13 +68,26 @@
   margin-left: 10px;
 }
 
-.games-list__image-container::after {
+.games-list__image-container > div {
+  padding: 5px 10px;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.games-list__image-container--shadow::after {
   position: absolute;
   content: ' ';
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  left: 3px;
+  right: 3px;
+  top: 3px;
+  bottom: 3px;
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.75), inset 0px 0px 40px rgba(0, 0, 0, 1);
   z-index: 2;
 }
@@ -89,14 +103,25 @@
   z-index: 4;
 }
 
+.games-list__image-container--vertical {
+  margin: 60px 5px;
+  flex: 0 0 180px;
+}
+
+.games-list__image-container--vertical:hover {
+  transform: scale(1.4);
+}
+
 .games-list__image-container img {
   width: 100%;
   transition: border 0.1s;
   border: 3px solid rgba(0, 166, 231, 0);
+  height: 100%;
 }
 
 .games-list__image-container:hover img,
 .games-list__image-container--active img {
   transition: border 0.1s;
   border: 3px solid rgba(0, 166, 231, 1);
+  padding: 0px;
 }

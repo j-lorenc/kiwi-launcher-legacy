@@ -11,7 +11,7 @@ export function attachEvents(): void {
   app.on('activate', activate);
 }
 
-export function appReady(): void {
+export async function appReady(): Promise<void> {
   createWindow();
 }
 

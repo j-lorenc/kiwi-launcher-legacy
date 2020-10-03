@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import { Game } from '../../../../@types';
+import { Game } from '../../../../@types/models';
 
 import SteamIcon from '../../../assets/images/steam.svg';
 
@@ -29,6 +29,7 @@ const GameData: React.FC<{ game: Game }> = ({ game }) => {
   return (
     <div className={styles['game-view__container']}>
       <h1 className={styles['game-view__header']}>{game.name}</h1>
+
       <div className={styles['game-view__meta']}>
         <div className={styles['game-view__launcher']}>
           <SteamIcon width={'20px'} height={'20px'} />
@@ -63,7 +64,11 @@ const GameData: React.FC<{ game: Game }> = ({ game }) => {
           {game.lastPlayed ? new Date(game.lastPlayed * 1000).toLocaleDateString() : 'Unplayed'}
         </div>
       </div>
-      {game.installed ? <PlayButton id={game.id} /> : <InstallButton id={game.id} />}
+      {game.installed ? (
+        <PlayButton id={game.originalId} />
+      ) : (
+        <InstallButton id={game.originalId} />
+      )}
     </div>
   );
 };

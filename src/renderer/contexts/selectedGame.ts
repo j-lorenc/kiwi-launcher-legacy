@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { SelectedGameContextType, Game, SelectedGameAction } from '../../@types';
+import { SelectedGameContextType, SelectedGameAction } from '../../@types';
+import { Game } from '../../@types/models';
 
 export const selectedGameReducer = (state: Game, action: SelectedGameAction): Game => {
   switch (action.type) {

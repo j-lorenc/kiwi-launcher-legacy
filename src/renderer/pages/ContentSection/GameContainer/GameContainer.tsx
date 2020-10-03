@@ -1,5 +1,5 @@
 import React from 'react';
-import { Game } from '../../../../@types';
+import { Game } from '../../../../@types/models';
 import withAnimation from '../../../hocs/withAnimation';
 import { AnimeProps } from 'react-anime';
 import styles from './styles.module.scss';

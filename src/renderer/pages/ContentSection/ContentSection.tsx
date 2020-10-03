@@ -5,12 +5,14 @@ import { GameDetails } from './GameContainer/GameContainer';
 import styles from './styles.module.scss';
 import GameBanner from './GameBanner/GameBanner';
 
-import { Game, CurrentWindow } from '../../../@types';
+import { CurrentWindow } from '../../../@types';
+import { Game } from '../../../@types/models';
 import { requestGamesList } from '../../events/game';
 import { gamesListener } from '../../listeners/games';
 import GameCarousel from './GameCarousel/GameCarousel';
 import { useFilterContext } from '../../contexts/filteredGame';
 import { useWindowContext } from '../../contexts/currentWindow';
+import VerticalGameCarousel from './GameCarousel/VerticalGameCarousel';
 
 const ContentSection: React.FC = () => {
   const [games, setGames] = useState<Game[]>([] as Game[]);
@@ -43,20 +45,20 @@ const ContentSection: React.FC = () => {
           : -1;
       })
       .reverse()
-      .slice(0, 10);
+      .slice(0, 20);
 
     const collection = [...games]
       .sort((a: Game, b: Game) => {
         return a.name.toLocaleLowerCase().localeCompare(b.name.toLocaleLowerCase());
       })
-      .slice(0, 10);
+      .slice(0, 20);
 
     return (
       <section className={styles['content-section']}>
         <div>
           <MemoGameBanner game={game} />
           <div className={styles['game-lists']}>
-            <GameCarousel
+            <VerticalGameCarousel
               title="Continue Playing"
               games={lastPlayedGames}
               selectedGame={game}
