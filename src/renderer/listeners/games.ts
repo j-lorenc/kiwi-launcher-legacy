@@ -1,15 +1,22 @@
+import { SelectedGameAction } from '../../@types';
 import { Game } from '../../@types/models';
 
 export const gamesListener = (
   setGames: (games: Game[]) => void,
-  setSelectedGame: (game: Game) => void
+  setSelectedGame: (gameAction: SelectedGameAction) => void,
+  selectedGame?: Game
 ): void => {
   window.addEventListener('message', (e) => {
     if (e.data.type === 'games') {
-      setGames(e.data.value);
-      setSelectedGame(
-        (JSON.parse(localStorage.getItem('selectedGame') || '') as Game) || e.data.value[0]
-      );
+      const games: Game[] = e.data.value;
+      setGames(games);
+
+      const newGame = selectedGame && selectedGame.id ? selectedGame : games[0];
+
+      setSelectedGame({
+        type: 'setSelectedGame',
+        payload: newGame,
+      });
     }
   });
 };

@@ -2,7 +2,11 @@
   display: flex;
   flex: 1;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
+
+  &--no-scroll {
+    overflow-y: hidden;
+  }
 }
 
 .game-lists {

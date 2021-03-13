@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { SelectedGameAction } from '../../../../@types';
+import React from 'react';
 import { Game } from '../../../../@types/models';
 import { useSelectedGameContext } from '../../../contexts/selectedGame';
 import { useFilterContext } from '../../../contexts/filteredGame';
@@ -9,42 +8,39 @@ import styles from './styles.module.scss';
 import cs from 'classnames';
 
 export const GamesList: React.FC<{
-  selectedGame: Game;
   games: Game[];
-  setSelectedGame: (game: Game) => void;
-}> = ({ games, setSelectedGame }) => {
-  const { state: selectedGame, dispatch } = useSelectedGameContext();
+}> = ({ games }) => {
   const { state: filterState } = useFilterContext();
+
+  const filteredGames = games
+    .sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    })
+    .filter((game) => {
+      return game.name.toLocaleLowerCase().includes(filterState.gameName.toLocaleLowerCase());
+    });
 
   return (
     <aside className={styles['games-list-container']}>
-      <ul className={styles['games-list']}>
-        {games
-          .sort((a, b) => {
-            return a.name.localeCompare(b.name);
-          })
-          .filter((game) => {
-            return game.name.toLocaleLowerCase().includes(filterState.gameName.toLocaleLowerCase());
-          })
-          .map((game) => (
+      <div className={styles['games-list__header']}>Library</div>
+      <div className={styles['games-list__section']}>
+        <ul className={styles['games-list']}>
+          {filteredGames.map((game) => (
             <li key={game.id} className={styles['games-list__list-item']}>
-              <GameButton
-                game={game}
-                setSelectedGame={setSelectedGame}
-                selectedGame={selectedGame}
-              />
+              <GameButton game={game} />
             </li>
           ))}
-      </ul>
+        </ul>
+      </div>
     </aside>
   );
 };
 
 const GameButton: React.FC<{
   game: Game;
-  selectedGame: Game;
-  setSelectedGame: (game: Game) => void;
-}> = ({ game, selectedGame, setSelectedGame }) => {
+}> = ({ game }) => {
+  const { state: selectedGame, dispatch: setSelectedGame } = useSelectedGameContext();
+
   const buttonClasses = cs({
     [styles['games-list__game']]: true,
     [styles['games-list__game--active']]: selectedGame.id === game.id,
@@ -55,9 +51,7 @@ const GameButton: React.FC<{
     <button
       className={buttonClasses}
       onClick={() => {
-        if (selectedGame.id !== game.id) {
-          setSelectedGame(game);
-        }
+        setSelectedGame({ type: 'setSelectedGame', payload: game });
       }}
     >
       <img className={styles['games-list__game__icon']} src={game.iconUrl} />

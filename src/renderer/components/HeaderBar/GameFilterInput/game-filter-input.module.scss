@@ -1,0 +1,70 @@
+.search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  input {
+    font-family: 'SairaExtraCondensed';
+    font-size: 14px;
+
+    background: rgba(0, 0, 0, 0.5);
+    padding: 6px 35px;
+    color: white;
+    border-right: 1px solid rgba(255, 255, 255, 0.17);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+
+    letter-spacing: 0.5px;
+
+    outline: none;
+    width: 100px;
+    border-radius: 3px;
+    transition: 0.15s width;
+
+    &:focus,
+    &:active,
+    &.active {
+      border-right: 1px solid rgba(181, 230, 29, 1);
+      border-bottom: 1px solid rgba(181, 230, 29, 1);
+
+      border-top: 1px solid rgba(180, 230, 29, 0.6);
+      border-left: 1px solid rgba(181, 230, 29, 0.6);
+
+      width: 250px;
+      transition: 0.3s width;
+
+      & + .search-container__icon {
+        visibility: visible;
+      }
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--search {
+      left: 5px;
+      transform: scale(0.8);
+    }
+
+    &--delete {
+      visibility: hidden;
+      cursor: pointer;
+      right: 5px;
+      top: -3px;
+      bottom: -3px;
+      right: 0px;
+      padding-right: 10px;
+      transform: scale(0.8);
+      z-index: 2;
+
+      svg {
+        fill: white;
+      }
+    }
+  }
+}

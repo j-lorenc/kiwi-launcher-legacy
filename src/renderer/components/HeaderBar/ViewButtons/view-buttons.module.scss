@@ -1,0 +1,16 @@
+.view-button {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+
+  svg {
+    stroke-width: 1.5px;
+    width: 20px;
+    height: 20px;
+    stroke: #3a3a3a;
+  }
+
+  &--active svg {
+    stroke: #c4f37f;
+  }
+}

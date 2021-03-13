@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { GameFilter, FilterAction, FilterContextType } from '../../@types';
 
+
 export const filterReducer = (state: GameFilter, action: FilterAction): GameFilter => {
   switch (action.type) {
     case 'filter': {

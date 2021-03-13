@@ -5,9 +5,12 @@ import { Game } from '../../@types/models';
 export const selectedGameReducer = (state: Game, action: SelectedGameAction): Game => {
   switch (action.type) {
     case 'setSelectedGame': {
-      return {
-        ...action.payload,
-      };
+      if (state.id === action.payload.id) {
+        return state;
+      }
+      const newGame = { ...state, ...action.payload };
+      localStorage.setItem('selectedGame', JSON.stringify(newGame));
+      return newGame;
     }
   }
 };

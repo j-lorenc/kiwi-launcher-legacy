@@ -5,6 +5,7 @@ import { AnimeProps } from 'react-anime';
 import styles from './styles.module.scss';
 import { CoverImage } from '../../../components/CoverImage/CoverImage';
 import { InstallButton, PlayButton } from '../../../components/GameButton/GameButton';
+import { dateMillisToString, playtimeMillisToString } from '../../../utilities/dateUtilities';
 
 export const GameDetails: React.FC<{ game: Game }> = ({ game }) => {
   return (
@@ -28,8 +29,10 @@ const InnerCard: React.FC<{ game: Game }> = ({ game }) => {
   return (
     <div className={styles['card__card-grid']}>
       <div className={styles['card__card-grid__row']}>
-        {game.coverUrl && (
+        {game.coverUrl ? (
           <CoverImage className={styles['card__cover-image']} coverSrc={game.coverUrl} />
+        ) : (
+          <div></div>
         )}
         <h1 className={`${styles['card__header']}`}> {game.name}</h1>
       </div>
@@ -53,24 +56,13 @@ const LiveData: React.FC<{ className: string; game: Game }> = ({ className, game
       {!!game.playtime && (
         <>
           <span className={styles['card__live-data__header']}>Played for</span>
-          <span>
-            {game.playtime &&
-              !!Math.floor(game.playtime / 60) &&
-              `${Math.floor(game.playtime / 60)} hour${
-                Math.floor(game.playtime / 60) > 1 ? 's' : ''
-              }`}
-            {game.playtime &&
-              !Math.floor(game.playtime / 60) &&
-              `${game.playtime % 60} minute${game.playtime % 60 > 1 ? 's' : ''}`}
-          </span>
+          <span>{playtimeMillisToString(game.playtime)}</span>
         </>
       )}
       {game.lastPlayed && (
         <>
           <span className={styles['card__live-data__header']}>Last Played</span>
-          <span>
-            {game.lastPlayed ? new Date(game.lastPlayed * 1000).toLocaleDateString() : null}
-          </span>
+          <span>{dateMillisToString(game.lastPlayed)}</span>
         </>
       )}
     </div>

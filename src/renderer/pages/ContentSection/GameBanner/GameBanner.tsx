@@ -11,6 +11,8 @@ import withAnimation from '../../../hocs/withAnimation';
 import { AnimeProps } from 'react-anime';
 
 const GameBanner: React.FC<{ game: Game }> = ({ game }) => {
+  if (!game) return <></>;
+
   return (
     <div
       className={styles['game-view']}
@@ -26,11 +28,14 @@ const GameBanner: React.FC<{ game: Game }> = ({ game }) => {
 };
 
 const GameData: React.FC<{ game: Game }> = ({ game }) => {
+  const { name, originalId, installed, playtime, lastPlayed } = game;
+
   return (
     <div className={styles['game-view__container']}>
-      <h1 className={styles['game-view__header']}>{game.name}</h1>
+      <h1 className={styles['game-view__header']}>{name}</h1>
 
       <div className={styles['game-view__meta']}>
+        <div>{installed ? <PlayButton id={originalId} /> : <InstallButton id={originalId} />}</div>
         <div className={styles['game-view__launcher']}>
           <SteamIcon width={'20px'} height={'20px'} />
         </div>
@@ -39,18 +44,17 @@ const GameData: React.FC<{ game: Game }> = ({ game }) => {
           <div className={styles['img']}>
             <ClockIcon width={20} height={20} viewBox="0 0 24 24" />
           </div>
-          {game.playtime
+          {}
+          {playtime
             ? `
             ${
-              Math.floor(game.playtime / 60)
-                ? `${Math.floor(game.playtime / 60)} hour${
-                    Math.floor(game.playtime / 60) > 1 ? 's' : ''
-                  }`
+              Math.floor(playtime / 60)
+                ? `${Math.floor(playtime / 60)} hour${Math.floor(playtime / 60) > 1 ? 's' : ''}`
                 : ''
             }
             ${
-              !Math.floor(game.playtime / 60)
-                ? `${game.playtime % 60} minute${game.playtime % 60 > 1 ? 's' : ''}`
+              !Math.floor(playtime / 60)
+                ? `${playtime % 60} minute${playtime % 60 > 1 ? 's' : ''}`
                 : ''
             }
           `
@@ -61,14 +65,9 @@ const GameData: React.FC<{ game: Game }> = ({ game }) => {
           <div className={styles['img']}>
             <CalendarIcon width={20} height={20} viewBox="0 0 24 24" />
           </div>
-          {game.lastPlayed ? new Date(game.lastPlayed * 1000).toLocaleDateString() : 'Unplayed'}
+          {lastPlayed ? new Date(lastPlayed * 1000).toLocaleDateString() : 'Unplayed'}
         </div>
       </div>
-      {game.installed ? (
-        <PlayButton id={game.originalId} />
-      ) : (
-        <InstallButton id={game.originalId} />
-      )}
     </div>
   );
 };

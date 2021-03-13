@@ -42,3 +42,23 @@
 :global(.fade-exit-done) {
   opacity: 0;
 }
+
+:global(.slide-left-enter) {
+  transform: translate(-94vw);
+}
+
+:global(.slide-left-enter.slide-left-enter-active) {
+  transform: translate(-94vw);
+}
+
+:global(.slide-left-exit) {
+  transform: translate(-94vw);
+}
+
+:global(.slide-left-exit.slide-left-exit-active) {
+  transform: translate(-94vw);
+}
+
+:global(.slide-left-exit-done) {
+  transform: translate(-94vw);
+}

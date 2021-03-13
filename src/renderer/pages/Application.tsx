@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useReducer } from 'react';
 import styles from './app.module.scss';
-import HeaderBar from './HeaderBar/HeaderBar';
+import HeaderBar from '../components/HeaderBar/HeaderBar';
 import FilterContext, { filterReducer, initialFilter } from '../contexts/filteredGame';
 import SelectedGameContext, {
   selectedGameReducer,
@@ -14,11 +14,11 @@ import WindowContext, {
   useWindowContext,
 } from '../contexts/currentWindow';
 
-import FooterBar from './FooterBar/FooterBar';
 import ContentSection from './ContentSection/ContentSection';
 
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { CurrentWindow } from '../../@types';
+import FooterBar from '../components/FooterBar/FooterBar';
 
 export const Application: () => JSX.Element = () => {
   const [state, dispatch] = useReducer(filterReducer, initialFilter);

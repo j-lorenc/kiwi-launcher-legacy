@@ -11,7 +11,8 @@ async function seedDatabase() {
 seedDatabase();
 
 export const refreshGamesList = (): void => {
-  console.log('Refreshing games list');
+  // console.log('Refreshing games list');
+  importGame();
 };
 
 export const requestGamesList = async (): Promise<void> => {

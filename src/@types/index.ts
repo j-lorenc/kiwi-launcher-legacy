@@ -101,13 +101,13 @@ export interface GameInstallData {
   lastPlayed?: number;
 }
 
-export interface SteamGameLibraries extends JSON {
+export interface SteamGameLibraries {
   LibraryFolders: {
     [key: string]: string;
   };
 }
 
-export interface SteamAcfFile extends JSON {
+export interface SteamAcfFile {
   AppState: {
     appid: number;
     Universe: number;
@@ -132,7 +132,7 @@ export interface SteamAcfFile extends JSON {
   };
 }
 
-export interface SteamLocalConfig extends JSON {
+export interface SteamLocalConfig {
   UserLocalConfigStore: {
     Software: {
       Valve: {

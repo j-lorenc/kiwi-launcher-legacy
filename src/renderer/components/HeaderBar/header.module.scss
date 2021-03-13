@@ -1,0 +1,56 @@
+.header-bar {
+  color: white;
+  background: linear-gradient(rgba(15, 15, 15, 0.99), rgba(15, 15, 15, 0.99));
+  border-bottom: 1px solid rgba(5, 5, 5, 0.1);
+  padding: 5px;
+  z-index: 1;
+  position: relative;
+
+  backdrop-filter: blur(10px);
+}
+
+.title-bar {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding-bottom: 5px;
+
+  &__drag-bar {
+    -webkit-app-region: drag;
+    flex: 1;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+    &__text {
+      font-size: 13px;
+    }
+  }
+}
+
+.settings-bar {
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+
+  & > div {
+    margin-left: 10px;
+  }
+}
+
+.icon-list {
+  display: flex;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+    margin-right: 10px;
+  }
+}
